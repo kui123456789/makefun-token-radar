@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Early Radar — Token Launch Radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>EARLY RADAR</h1>
+    <p class="sub">Which pre-token protocol is worth farming next — ranked by implied value.</p>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<section class="panel model">
+  <h2>How the value is worked out</h2>
+  <p id="formula"></p>
+  <p class="fine">Size uses a square root, so doubling TVL lifts value by about 41%, not 100%. Growth uses a soft cap: a +200% week is worth at most about 1.85&times;, a &minus;60% week costs about two thirds. Maturity is an S-curve in days since listing. A small bonus rewards multi-chain reach, and the category factor adjusts for risk. Every factor comes from the snapshot's own figures — no protocol is ever special-cased by name.</p>
+  <p class="fine warn">Implied value is this entry's own claim about what a token would be worth if the protocol's record stayed as it is. It is not a prediction that a token will be issued, or when.</p>
+</section>
+
+<section class="panel controls">
+  <label>Search <input id="q" type="search" placeholder="name or slug"></label>
+  <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+  <label>Category <select id="cat"><option value="">All categories</option></select></label>
+  <label>Scope <select id="scope">
+    <option value="all">All 200 ranked</option>
+    <option value="watchlist">Watchlist only</option>
+    <option value="early">Early finds only</option>
+  </select></label>
+  <label>Sort <select id="sort">
+    <option value="rank">Rank</option>
+    <option value="implied">Implied value</option>
+    <option value="tvl">TVL</option>
+    <option value="growth">7d growth</option>
+    <option value="age">Age</option>
+  </select></label>
+  <span class="count" id="count"></span>
+</section>
+
+<main>
+  <table id="board">
+    <thead><tr>
+      <th data-k="rank">#</th><th data-k="name">Protocol</th><th data-k="category">Category</th>
+      <th>Chains</th><th data-k="tvl">TVL</th><th data-k="growth">7d</th>
+      <th data-k="age">Age</th><th data-k="implied">Implied value</th><th>List</th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</main>
+
+<section class="panel" id="detail" hidden>
+  <h2 id="d-title"></h2>
+  <div class="d-grid">
+    <div>
+      <h3>Value breakdown</h3>
+      <table class="mini"><tbody id="d-break"></tbody></table>
+      <p class="fine" id="d-formula"></p>
+    </div>
+    <div>
+      <h3>How to farm it</h3>
+      <ol id="d-steps"></ol>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Already has a token — not ranked</h2>
+  <p class="fine">These protocols record a token, so they are not pre-token launches. They are shown for contrast only, by market cap.</p>
+  <table id="live">
+    <thead><tr><th>Protocol</th><th>Category</th><th>TVL</th><th>Market cap</th></tr></thead>
+    <tbody id="live-rows"></tbody>
+  </table>
+</section>
+
+<footer class="fine">Snapshot: DefiLlama protocols, fetched 2026-11-14. Board: 200 rows — all 40 watchlist protocols plus the 160 highest-scoring pre-token protocols below the $50M floor. Model: early-radar-1.</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
